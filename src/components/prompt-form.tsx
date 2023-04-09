@@ -1,8 +1,6 @@
-"use client"
-
 import { supabase } from "@/utils/supabase-client"
 
-export default function PromptForm() {
+export default function PromptForm({ callback }: { callback: () => void }) {
   async function submit(e: React.FormEvent) {
     e.preventDefault()
 
@@ -11,9 +9,11 @@ export default function PromptForm() {
 
     const { data, error } = await supabase
       .from('prompts')
-      .insert({ prompt: promptElement.value })
+      .insert({ content: promptElement.value })
 
     console.log(data, error)
+
+    callback()
   }
 
   return (

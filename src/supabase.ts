@@ -11,28 +11,31 @@ export interface Database {
     Tables: {
       prompts: {
         Row: {
+          content: string
           created_at: string
           created_by: string | null
           id: string
           original_author: string | null
           original_author_url: string | null
-          prompt: string
+          title: string | null
         }
         Insert: {
+          content: string
           created_at?: string
           created_by?: string | null
           id?: string
           original_author?: string | null
           original_author_url?: string | null
-          prompt: string
+          title?: string | null
         }
         Update: {
+          content?: string
           created_at?: string
           created_by?: string | null
           id?: string
           original_author?: string | null
           original_author_url?: string | null
-          prompt?: string
+          title?: string | null
         }
       }
     }
