@@ -11,31 +11,40 @@ export interface Database {
     Tables: {
       prompts: {
         Row: {
+          author: string | null
+          author_url: string | null
           content: string
           created_at: string
-          created_by: string | null
+          description: string | null
           id: string
-          original_author: string | null
-          original_author_url: string | null
+          submitted_by: string
+          tags: string[]
           title: string | null
+          votes: number
         }
         Insert: {
+          author?: string | null
+          author_url?: string | null
           content: string
           created_at?: string
-          created_by?: string | null
+          description?: string | null
           id?: string
-          original_author?: string | null
-          original_author_url?: string | null
+          submitted_by: string
+          tags?: string[]
           title?: string | null
+          votes?: number
         }
         Update: {
+          author?: string | null
+          author_url?: string | null
           content?: string
           created_at?: string
-          created_by?: string | null
+          description?: string | null
           id?: string
-          original_author?: string | null
-          original_author_url?: string | null
+          submitted_by?: string
+          tags?: string[]
           title?: string | null
+          votes?: number
         }
       }
     }

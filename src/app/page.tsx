@@ -28,7 +28,7 @@ export default function Home() {
     <main className="flex flex-col items-center justify-between">
       <h1 className="text-4xl font-bold">PromptPoll.com</h1>
 
-      {user ? <PromptForm callback={() => setReload(true)} /> : <Login />}
+      {user ? <PromptForm user={user} callback={() => setReload(true)} /> : <Login />}
 
       <PromptList reload={reload} callback={() => setReload(false)} />
     </main>

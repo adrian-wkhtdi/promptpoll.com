@@ -2,6 +2,7 @@ import type { Database } from "@/supabase"
 
 import { useEffect, useState } from "react"
 import { supabase } from "@/utils/supabase-client"
+import Prompt from "@/components/prompt"
 
 export type Prompt = Database['public']['Tables']['prompts']['Row']
 
@@ -10,7 +11,7 @@ export default function PromptList({ reload, callback }: { reload: boolean, call
 
   useEffect(() => {
     if (reload || (!reload && promptList === null)) {
-      supabase.from('prompts').select('*').order('created_at', { ascending: false })
+      supabase.from('prompts').select('*').order('votes', { ascending: false })
         .then(({ data }) => data || [])
         .then(setPromptList)
         .then(callback)
@@ -18,17 +19,14 @@ export default function PromptList({ reload, callback }: { reload: boolean, call
   }, [reload])
 
   return (
-    <div className="flex flex-col items-center justify-between">
+    <>
       {promptList === null ? <div>Loading...</div> : (
-        <ul className="flex flex-col items-center justify-between">
+        <div className="flex flex-col gap-8 w-full max-w-prose">
           {promptList.map(prompt => (
-            <li key={prompt.id} className="flex flex-col items-center justify-between">
-              {prompt.title && <h2 className="text-2xl font-bold">{prompt.title}</h2>}
-              <p className="text-xl">{prompt.content}</p>
-            </li>
+            <Prompt key={prompt.id} prompt={prompt} />
           ))}
-        </ul>
+        </div>
       )}
-    </div>
+    </>
   )
 }

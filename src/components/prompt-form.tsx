@@ -1,6 +1,8 @@
+import type { User } from "@supabase/auth-helpers-nextjs"
+
 import { supabase } from "@/utils/supabase-client"
 
-export default function PromptForm({ callback }: { callback: () => void }) {
+export default function PromptForm({ user, callback }: { user: User, callback: () => void }) {
   async function submit(e: React.FormEvent) {
     e.preventDefault()
 
@@ -9,7 +11,10 @@ export default function PromptForm({ callback }: { callback: () => void }) {
 
     const { data, error } = await supabase
       .from('prompts')
-      .insert({ content: promptElement.value })
+      .insert({
+        content: promptElement.value,
+        submitted_by: user.id,
+      })
 
     console.log(data, error)
 
